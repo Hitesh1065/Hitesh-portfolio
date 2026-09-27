@@ -1,0 +1,92 @@
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { portfolioData } from '../data/portfolio';
+
+const Contact = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { personal } = portfolioData;
+
+  return (
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          className="text-center"
+        >
+          {/* Section Title */}
+          <div className="mb-12">
+            <p className="text-anthropic-coral font-mono text-sm mb-4">06. What&apos;s Next?</p>
+            <h2 className="font-display text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-slate-dark mb-6">Get In Touch</h2>
+            <p className="text-lg text-slate-dark/60 max-w-xl mx-auto leading-relaxed text-balance">
+              I&apos;m always open to exploring new roles, projects, or anything worth building together. If something
+              here sparked your curiosity, my inbox is open — I&apos;d love to hear from you.
+            </p>
+          </div>
+
+          {/* Contact Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="grid sm:grid-cols-2 gap-6 mb-12"
+          >
+            <a
+              href={`mailto:${personal.email}`}
+              className="bg-surface/80 p-6 rounded-2xl border border-slate-dark/10 hover:border-anthropic-coral/50 transition-all duration-300 hover:-translate-y-1 group"
+            >
+              <Mail className="w-8 h-8 text-anthropic-coral mx-auto mb-3" />
+              <h3 className="font-semibold text-slate-dark mb-2 group-hover:text-anthropic-coral transition-colors">Email</h3>
+              <p className="text-sm text-slate-dark/60 break-all">{personal.email}</p>
+            </a>
+
+            <a
+              href={`tel:${personal.phone.replace(/\s/g, '')}`}
+              className="bg-surface/80 p-6 rounded-2xl border border-slate-dark/10 hover:border-anthropic-coral/50 transition-all duration-300 hover:-translate-y-1 group"
+            >
+              <Phone className="w-8 h-8 text-anthropic-coral mx-auto mb-3" />
+              <h3 className="font-semibold text-slate-dark mb-2 group-hover:text-anthropic-coral transition-colors">Phone</h3>
+              <p className="text-sm text-slate-dark/60">{personal.phone}</p>
+            </a>
+          </motion.div>
+
+          {/* Primary CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <a
+              href={`mailto:${personal.email}`}
+              className="inline-block px-10 py-4 bg-anthropic-coral text-white hover:bg-anthropic-coral-light transition-all duration-300 font-mono text-base rounded shadow-lg shadow-anthropic-coral/20 mb-10"
+            >
+              Say Hello
+            </a>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            className="flex justify-center gap-8"
+          >
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-dark/60 hover:text-anthropic-coral transition-colors duration-300" aria-label="GitHub">
+              <Github className="w-5 h-5" />
+              <span className="text-sm font-mono">GitHub</span>
+            </a>
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-dark/60 hover:text-anthropic-coral transition-colors duration-300" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5" />
+              <span className="text-sm font-mono">LinkedIn</span>
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
